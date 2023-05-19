@@ -7,6 +7,8 @@ import { PrismaClientExceptionFilter } from 'nestjs-prisma';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
+
   // Class validator config
   app.useGlobalPipes(
     new ValidationPipe({

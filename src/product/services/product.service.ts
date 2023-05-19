@@ -32,7 +32,14 @@ export class ProductService {
       select: {
         id: true,
         name: true,
+        description: true,
+        price: true,
         _count: true,
+        category: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
 
@@ -49,6 +56,13 @@ export class ProductService {
     try {
       return await this.prisma.product.findFirst({
         where: { id },
+        include: {
+          category: {
+            select: {
+              name: true,
+            },
+          },
+        },
       });
     } catch (error) {
       throw new NotFoundException();
