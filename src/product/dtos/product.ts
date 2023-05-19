@@ -27,6 +27,13 @@ export class CreateProductDto {
 
   @IsNumber()
   @ApiProperty({
+    description: 'stock',
+    example: 0,
+  })
+  readonly stock: number;
+
+  @IsNumber()
+  @ApiProperty({
     description: 'categoryId',
     example: 0,
   })

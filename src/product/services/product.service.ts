@@ -34,6 +34,7 @@ export class ProductService {
         name: true,
         description: true,
         price: true,
+        stock: true,
         _count: true,
         category: {
           select: {

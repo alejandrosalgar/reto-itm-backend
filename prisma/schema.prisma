@@ -15,6 +15,7 @@ model Product {
   name        String
   description String
   price       Int
+  stock       Int
   categoryId  Int
 
   // Relations
@@ -23,34 +24,35 @@ model Product {
 }
 
 model Category {
-  id      Int       @id @default(autoincrement())
-  name    String
+  id   Int    @id @default(autoincrement())
+  name String
 
   Product Product[]
 }
 
 model Client {
-  id               Int                @id @default(autoincrement())
-  name             String
+  id   Int    @id @default(autoincrement())
+  name String
 
-  Order            Order[]
-  ProductsOnOrders ProductsOnOrders[]
+  Order Order[]
 }
 
 model Order {
-  id       Int    @id @default(autoincrement())
-  name     String
-  clientId Int
+  id         Int      @id @default(autoincrement())
+  clientId   Int
+  total      Int
+  created_at DateTime @default(now()) @db.Timestamptz(3)
 
   // Relations
-  client Client @relation(fields: [clientId], references: [id])
+  client   Client             @relation(fields: [clientId], references: [id])
+  products ProductsOnOrders[]
 }
 
 model ProductsOnOrders {
-  product    Product  @relation(fields: [productId], references: [id])
-  productId  Int
-  client     Client   @relation(fields: [clientId], references: [id])
-  clientId   Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  Order     Order   @relation(fields: [orderId], references: [id])
+  orderId   Int
 
-  @@id([productId, clientId])
+  @@id([productId, orderId])
 }
