@@ -32,6 +32,9 @@ export class ClientService {
       select: {
         id: true,
         name: true,
+        address: true,
+        identification: true,
+        phone: true,
         _count: true,
       },
     });

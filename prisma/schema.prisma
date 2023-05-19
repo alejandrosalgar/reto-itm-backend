@@ -31,8 +31,11 @@ model Category {
 }
 
 model Client {
-  id   Int    @id @default(autoincrement())
-  name String
+  id             Int    @id @default(autoincrement())
+  name           String
+  phone          String
+  identification String
+  address        String
 
   Order Order[]
 }
